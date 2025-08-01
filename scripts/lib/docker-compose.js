@@ -14,7 +14,7 @@ import { generateHealthCheck } from './service-manager.js'
 function buildDockerComposeConfig(services) {
 	// Nginx配置
 	const nginxConfig = {
-		image: 'harbor.fusionpaas.com/dify/nginx',
+		image: 'swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/nginx:latest',
 		container_name: 'mcp-nginx',
 		ports: ['11121:80'], // 修改端口映射为11121:80
 		volumes: [
