@@ -1,5 +1,5 @@
 # Builder stage
-FROM docker.io/library/node:lts-alpine as builder
+FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:18-alpine as builder
 WORKDIR /app
 
 # Copy package files and install dependencies
@@ -13,7 +13,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM docker.io/library/node:lts-alpine
+FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:18-alpine
 WORKDIR /app
 
 # Copy built files and package.json

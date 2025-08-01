@@ -14,7 +14,7 @@ import { generateHealthCheck } from './service-manager.js'
 function buildDockerComposeConfig(services) {
 	// Nginx配置
 	const nginxConfig = {
-		image: 'docker.io/library/nginx:stable-alpine',
+		image: 'harbor.fusionpaas.com/dify/nginx',
 		container_name: 'mcp-nginx',
 		ports: ['11121:80'], // 修改端口映射为11121:80
 		volumes: [
