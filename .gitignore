@@ -150,7 +150,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 # 不忽略scripts/lib目录
 !scripts/lib/
 lib64/
