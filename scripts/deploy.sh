@@ -85,7 +85,7 @@ fi
 echo ""
 echo "======================================"
 echo "MCP 服务访问地址:"
-grep -r '"name"' deployment-manifest.json | awk -F'"' '{print "• " $4 ": http://localhost/" $4}'
+grep -r '"name"' deployment-manifest.json | awk -F'"' '{print "• " $4 ": http://106.63.6.55:11121/" $4}'
 echo ""
 echo "部署信息:"
 echo "详细信息可在 deployment-manifest.json 文件中查看"

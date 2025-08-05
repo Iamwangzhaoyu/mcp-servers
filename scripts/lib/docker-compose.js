@@ -1,16 +1,9 @@
-/**
- * Docker Compose配置生成模块
- * 负责生成Docker Compose配置
- */
+// Docker Compose配置生成模块
 import fs from 'fs'
 import path from 'path'
 import { generateHealthCheck } from './service-manager.js'
 
-/**
- * 构建Docker Compose配置
- * @param {Array<Object>} services 服务列表
- * @returns {Object} Docker Compose配置对象
- */
+// 构建Docker Compose配置
 function buildDockerComposeConfig(services) {
 	// Nginx配置
 	const nginxConfig = {
@@ -135,14 +128,8 @@ function buildDockerComposeConfig(services) {
 	}
 }
 
-/**
- * 生成Docker Compose配置
- * @param {Array<Object>} services 服务列表
- * @param {string} configPath 配置文件路径
- */
+// 生成Docker Compose配置
 export function generateDockerCompose(services, configPath) {
-	console.log('📝 生成Docker Compose配置...')
-
 	try {
 		// 构建Docker Compose配置
 		const config = buildDockerComposeConfig(services)

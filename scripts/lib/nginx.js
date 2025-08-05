@@ -1,84 +1,12 @@
-/**
- * Nginx配置生成模块
- * 负责生成Nginx配置
- */
+// Nginx配置生成模块
 import fs from 'fs'
 import path from 'path'
 
-/**
- * 生成安全指南文档
- * @param {string} outputPath - 输出文件路径
- */
-export function generateSecurityGuide(outputPath) {
-	const content = `# MCP 服务安全指南
-
-此文档包含关于MCP服务部署的安全最佳实践和建议。
-
-## 已实施的安全措施
-
-1. **Nginx安全配置**
-   - 隐藏服务器版本信息
-   - 添加安全HTTP头部（XSS保护、CSRF保护等）
-   - 限制可访问的资源
-
-2. **Docker容器安全**
-   - 资源限制（CPU和内存）
-   - 非root用户运行服务
-   - 只读文件系统（除必要的写入目录）
-
-3. **网络安全**
-   - 容器间通信使用私有网络
-   - 只暴露必要端口
-   - 反向代理保护直接访问
-
-## 建议安全加固措施
-
-1. **启用HTTPS**
-   - 配置SSL证书
-   - 实施HTTP重定向到HTTPS
-   - 使用安全的SSL配置
-
-2. **实施访问控制**
-   - 添加认证机制
-   - 实施IP限制
-   - 设置适当的访问日志
-
-3. **定期更新和维护**
-   - 更新基础镜像
-   - 扫描漏洞
-   - 备份配置和数据
-
-## 监控建议
-
-1. 设置日志监控系统
-2. 定期检查异常访问模式
-3. 监控容器资源使用情况
-
----
-*本文档由系统自动生成，最后更新于 ${new Date().toISOString().split('T')[0]}*
-`
-
-	try {
-		// 如果文件已存在，先删除
-		if (fs.existsSync(outputPath)) {
-			fs.unlinkSync(outputPath)
-		}
-
-		fs.writeFileSync(outputPath, content)
-		console.log('✅ 安全指南生成完成')
-	} catch (error) {
-		console.warn(`⚠️ 生成安全指南失败: ${error.message}`)
-	}
-}
-
-/**
- * 生成Nginx配置文件
- * @param {Array} services - 服务列表
- * @param {string} nginxConfigPath - nginx配置文件路径
- */
-export function generateNginxConfig(services, nginxConfigPath) {
-	console.log('📝 生成nginx配置...')
-
+// 生成Nginx配置文件
+export function generateNginxConfig(
+	services, // 服务列表
+	nginxConfigPath // nginx配置文件路径
+) {
 	try {
 		// 如果配置文件已存在，直接删除
 		if (fs.existsSync(nginxConfigPath)) {

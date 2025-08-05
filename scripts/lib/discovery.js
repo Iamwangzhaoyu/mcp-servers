@@ -1,16 +1,9 @@
-/**
- * 服务发现模块
- * 负责发现和识别MCP服务
- */
+// 服务发现模块
 import fs from 'fs'
 import path from 'path'
 import { findFilesWithExtension } from './utils.js'
 
-/**
- * 检查是否为Node.js MCP服务
- * @param {string} servicePath 服务路径
- * @returns {boolean} 是否为Node.js MCP服务
- */
+// 检查是否为Node.js MCP服务
 export function isNodeMcpService(servicePath) {
 	const packageJsonPath = path.join(servicePath, 'package.json')
 
@@ -32,11 +25,7 @@ export function isNodeMcpService(servicePath) {
 	return false
 }
 
-/**
- * 检查是否为Python MCP服务
- * @param {string} servicePath 服务路径
- * @returns {boolean} 是否为Python MCP服务
- */
+// 检查是否为Python MCP服务
 export function isPythonMcpService(servicePath) {
 	// 检查requirements.txt
 	const requirementsPath = path.join(servicePath, 'requirements.txt')
@@ -76,11 +65,7 @@ export function isPythonMcpService(servicePath) {
 	return false
 }
 
-/**
- * 检查是否为Java MCP服务
- * @param {string} servicePath 服务路径
- * @returns {boolean} 是否为Java MCP服务
- */
+// 检查是否为Java MCP服务
 export function isJavaMcpService(servicePath) {
 	// 检查pom.xml或build.gradle
 	const pomPath = path.join(servicePath, 'pom.xml')
@@ -132,11 +117,7 @@ export function isJavaMcpService(servicePath) {
 	return false
 }
 
-/**
- * 检查Dockerfile是否包含MCP特性
- * @param {string} servicePath 服务路径
- * @returns {boolean} Dockerfile是否包含MCP特性
- */
+// 检查Dockerfile是否包含MCP特性
 export function dockerfileContainsMcpFeatures(servicePath) {
 	const dockerfilePath = path.join(servicePath, 'Dockerfile')
 	try {
@@ -157,11 +138,7 @@ export function dockerfileContainsMcpFeatures(servicePath) {
 	return false
 }
 
-/**
- * 从Dockerfile提取运行命令
- * @param {string} dockerfilePath Dockerfile路径
- * @returns {string|null} 提取的命令
- */
+// 从Dockerfile提取运行命令
 export function extractDockerCommand(dockerfilePath) {
 	try {
 		if (fs.existsSync(dockerfilePath)) {
@@ -217,13 +194,7 @@ export function extractDockerCommand(dockerfilePath) {
 	return null
 }
 
-/**
- * 确定服务运行命令
- * @param {string} servicePath 服务路径
- * @param {string} serviceName 服务名称
- * @param {string} serviceType 服务类型
- * @returns {string} 运行命令
- */
+// 确定服务运行命令
 export function determineServiceRunCommand(
 	servicePath,
 	serviceName,

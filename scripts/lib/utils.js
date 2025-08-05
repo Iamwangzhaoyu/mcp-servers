@@ -1,7 +1,4 @@
-/**
- * 工具函数模块
- * 提供各种通用的工具函数
- */
+// 工具函数模块
 import fs from 'fs'
 import path from 'path'
 
@@ -9,23 +6,14 @@ import path from 'path'
 const MAX_SEARCH_DEPTH = 5
 const MAX_FILES_TO_SEARCH = 50
 
-/**
- * 在目录中查找具有指定扩展名的文件
- * @param {string} dirPath 目录路径
- * @param {string} extension 文件扩展名
- * @param {number} maxDepth 最大搜索深度
- * @param {number} limit 最大文件数量
- * @param {number} currentDepth 当前搜索深度
- * @param {Set<string>} visitedDirs 已访问的目录集合(防止循环)
- * @returns {string[]} 文件路径列表
- */
+// 在目录中查找具有指定扩展名的文件
 export function findFilesWithExtension(
-	dirPath,
-	extension,
-	maxDepth = MAX_SEARCH_DEPTH,
-	limit = MAX_FILES_TO_SEARCH,
-	currentDepth = 0,
-	visitedDirs = new Set()
+	dirPath, // 目录路径
+	extension, // 文件扩展名
+	maxDepth = MAX_SEARCH_DEPTH, // 最大搜索深度
+	limit = MAX_FILES_TO_SEARCH, // 最大文件数量
+	currentDepth = 0, // 当前搜索深度
+	visitedDirs = new Set() // 已访问的目录集合(防止循环)
 ) {
 	const foundFiles = []
 	if (currentDepth > maxDepth) return foundFiles
@@ -81,11 +69,7 @@ export function findFilesWithExtension(
 	return foundFiles
 }
 
-/**
- * 服务名称清理
- * @param {string} name 原始服务名称
- * @returns {string} 清理后的服务名称
- */
+// 服务名称清理
 export function sanitizeServiceName(name) {
 	// 替换非法字符为连字符
 	let sanitized = name.toLowerCase().replace(/[^a-z0-9_-]/g, '-')
@@ -101,11 +85,7 @@ export function sanitizeServiceName(name) {
 	return sanitized
 }
 
-/**
- * 路径清理
- * @param {string} inputPath 原始路径
- * @returns {string} 清理后的路径
- */
+// 路径清理
 export function sanitizePath(inputPath) {
 	// 确保路径以/开头
 	let path = inputPath
@@ -122,11 +102,7 @@ export function sanitizePath(inputPath) {
 	return path
 }
 
-/**
- * 检查服务名称是否合法
- * @param {string} name 服务名称
- * @returns {boolean} 是否合法
- */
+// 检查服务名称是否合法
 export function isValidServiceName(name) {
 	return /^[a-z0-9_-]+$/.test(name)
 }

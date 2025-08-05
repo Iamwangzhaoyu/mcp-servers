@@ -1,18 +1,11 @@
-/**
- * 端口管理模块
- * 负责端口检测和分配
- */
+// 端口管理模块
 import { createServer } from 'net'
 
 // 端口配置
 const BASE_PORT = 3000
 const PORT_RANGE = 1000 // 端口范围，从BASE_PORT到BASE_PORT+PORT_RANGE
 
-/**
- * 检查端口是否可用
- * @param {number} port 要检查的端口
- * @returns {Promise<boolean>} 端口是否可用
- */
+// 检查端口是否可用
 export async function isPortAvailable(port) {
 	return new Promise((resolve) => {
 		const server = createServer()
@@ -71,11 +64,7 @@ export async function isPortAvailable(port) {
 	})
 }
 
-/**
- * 查找可用端口
- * @param {number} startPort 起始端口
- * @returns {Promise<number>} 返回可用端口
- */
+// 查找可用端口
 export async function findAvailablePort(startPort) {
 	let port = startPort
 	const maxPort = BASE_PORT + PORT_RANGE

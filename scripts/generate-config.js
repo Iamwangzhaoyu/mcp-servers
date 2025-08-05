@@ -1,30 +1,22 @@
 #!/usr/bin/env node
 
-/**
- * MCP服务配置生成工具
- * 自动发现和配置MCP服务，生成docker-compose.yml和nginx配置
- */
+// MCP服务配置生成工具，自动发现和配置MCP服务，生成docker-compose.yml和nginx配置
 
-// 文件系统和路径模块
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-// 导入所需函数
 import {
 	discoverServices,
 	validateServices,
 	generateDockerCompose,
 	generateNginxConfig,
-	generateSecurityGuide,
 	generateDeploymentManifest,
 } from './lib/index.js'
 
-// ES模块中获取__dirname
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// 路径定义
 const ROOT_DIR = path.join(__dirname, '..')
 const SRC_DIR = path.join(ROOT_DIR, 'src')
 const DOCKER_COMPOSE_PATH = path.join(ROOT_DIR, 'docker-compose.yml')
@@ -66,16 +58,13 @@ async function generateConfig() {
 		console.log('📝 生成nginx配置...')
 		await generateNginxConfig(services, NGINX_CONFIG_PATH)
 
-		// 生成安全指南
-		console.log('📝 生成安全指南...')
-		await generateSecurityGuide(SECURITY_GUIDE_PATH)
-
 		// 生成部署清单
 		console.log('📄 生成部署清单...')
 		await generateDeploymentManifest(services, DEPLOYMENT_MANIFEST_PATH)
 
-		console.log('✅ 所有配置生成完成!')
-		console.log('🔔 提示: 现在可以使用 "./scripts/deploy.sh" 来部署服务')
+		console.log(
+			'✅ 所有配置生成完成!现在可以使用 "./scripts/deploy.sh" 来部署服务'
+		)
 	} catch (error) {
 		console.error('❌ 配置生成失败:', error.message)
 		process.exit(1)

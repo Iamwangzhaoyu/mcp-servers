@@ -1,7 +1,4 @@
-/**
- * 服务管理模块
- * 负责服务发现和管理
- */
+// 服务管理模块
 import fs from 'fs'
 import path from 'path'
 import {
@@ -18,14 +15,11 @@ import {
 } from './utils.js'
 import { BASE_PORT, findAvailablePort } from './ports.js'
 
-/**
- * 发现服务
- * @param {string} srcDir 源码目录
- * @param {number} startPort 起始端口号，默认从BASE_PORT开始
- * @returns {Promise<Array<Object>>} 服务列表
- */
-export async function discoverServices(srcDir, startPort = BASE_PORT) {
-	console.log('🔍 开始发现MCP服务...')
+// 发现服务
+export async function discoverServices(
+	srcDir, // 源码目录
+	startPort = BASE_PORT // 起始端口号，默认从BASE_PORT开始
+) {
 	const services = []
 	const portMap = {} // 用于跟踪端口分配
 
@@ -99,9 +93,6 @@ export async function discoverServices(srcDir, startPort = BASE_PORT) {
 							command: command.replace('{{PORT}}', port),
 						}
 
-						console.log(
-							`✅ 发现MCP服务: ${dir} (${serviceType}), 将使用端口: ${port}`
-						)
 						services.push(serviceInfo)
 					}
 				}
@@ -117,11 +108,7 @@ export async function discoverServices(srcDir, startPort = BASE_PORT) {
 	return services
 }
 
-/**
- * 生成服务的健康检查配置
- * @param {Object} service 服务对象
- * @returns {Object} 健康检查配置
- */
+// 生成服务的健康检查配置
 export function generateHealthCheck(service) {
 	const healthCheck = {
 		interval: '30s',
@@ -149,11 +136,7 @@ export function generateHealthCheck(service) {
 	return healthCheck
 }
 
-/**
- * 验证服务配置
- * @param {Array<Object>} services 服务列表
- * @returns {Array<Object>} 验证后的服务列表
- */
+// 验证服务配置
 export function validateServices(services) {
 	// 检查服务名称冲突
 	const serviceNames = new Set()
@@ -207,14 +190,11 @@ export function validateServices(services) {
 	return services
 }
 
-/**
- * 生成部署清单
- * @param {Array<Object>} services 服务列表
- * @param {string} manifestPath 清单文件路径
- */
-export function generateDeploymentManifest(services, manifestPath) {
-	console.log('📄 生成部署清单...')
-
+// 生成部署清单
+export function generateDeploymentManifest(
+	services, // 服务列表
+	manifestPath // 清单文件路径
+) {
 	try {
 		// 如果清单文件已存在，先删除它
 		if (fs.existsSync(manifestPath)) {
@@ -240,7 +220,6 @@ export function generateDeploymentManifest(services, manifestPath) {
 
 		// 写入清单文件
 		fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
-		console.log('✅ 部署清单生成完成')
 	} catch (error) {
 		console.error('❌ 生成部署清单失败:', error.message)
 		throw error
