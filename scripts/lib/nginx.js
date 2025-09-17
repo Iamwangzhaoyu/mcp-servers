@@ -70,6 +70,27 @@ ${services
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }`
+		} else if (service.name === 'mcp-chart-service') {
+			// 为图表服务增加更长的超时设置
+			return `    # ${service.name}服务
+    location /${service.name} {
+        proxy_pass http://${service.name}:${service.port};
+        
+        # 增加超时设置
+        proxy_connect_timeout 300s;
+        proxy_send_timeout 300s; 
+        proxy_read_timeout 300s;
+        send_timeout 300s;
+        
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        # WebSocket支持
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }`
 		} else {
 			return `    # ${service.name}服务
     location /${service.name} {
