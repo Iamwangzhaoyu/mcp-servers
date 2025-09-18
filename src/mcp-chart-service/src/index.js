@@ -24,8 +24,8 @@ const PORT = args.port || process.env.PORT || 3000
 // McpChartClient类从原chart.js保留
 class McpChartClient extends EventEmitter {
 	constructor({
-		server = 'http://106.63.6.55:11121', //服务器地址
-		endpoint = '/mcp-server-chart', // 服务端点
+		server = 'http://mcp-server-chart:3002', // 使用Docker网络中的服务名称
+		endpoint = '/mcp-server-chart', // 添加正确的路径前缀
 		clientName = 'mcp-chart-client', // 客户端名称
 		clientVersion = '1.0.0', // 客户端版本
 	} = {}) {
