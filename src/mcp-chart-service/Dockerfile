@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:18-alpine as builder
 
 WORKDIR /app
 
